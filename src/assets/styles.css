@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    gap: 10px;
+    height: 100vh;
+    min-width: 100vw;
+    padding: 60px;
+    box-sizing: border-box;
+    background-color: #f3f3f3;
+}
