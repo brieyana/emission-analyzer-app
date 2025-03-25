@@ -7,3 +7,26 @@
     box-sizing: border-box;
     background-color: #f3f3f3;
 }
+
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.description {
+    font-weight: 200;
+    max-width: 300px;
+    text-align: center;
+    line-height: 1.2em;
+}
+
+h2, p {
+    margin: 0;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 1.5em;
+}

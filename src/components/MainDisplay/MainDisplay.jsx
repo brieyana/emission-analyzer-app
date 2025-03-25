@@ -1,8 +1,8 @@
 import CSS from './MainDisplay.module.css';
 
-const MainDisplay = ({ children }) => {
+const MainDisplay = ({ children, style }) => {
     return (
-        <div id={CSS.mainDisplay}>
+        <div id={CSS.mainDisplay} style={style}>
             {children}
         </div>
     );
