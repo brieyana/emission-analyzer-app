@@ -1,5 +1,5 @@
-import Features from './landing-features'
-import { useNavigate } from 'react-router-dom';
+import Features from './landingFeatures'
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
   const navigate = useNavigate();

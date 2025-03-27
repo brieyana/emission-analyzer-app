@@ -1,5 +1,5 @@
-import Header from './Landing-header';
-import Hero from './Landing-hero'
+import Header from './components/LandingDisplay/LandingHeader'
+import Hero from './components/LandingDisplay/LandingHero'
 
 const LandingPage = () => {
   return (
