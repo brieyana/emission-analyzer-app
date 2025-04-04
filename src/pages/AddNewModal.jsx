@@ -4,19 +4,22 @@ const NewModal = ({ isVisible, onClose }) => {
   const [formData, setFormData] = useState({
     engineId: '',
     engineType: '',
-    ratedThrust: '',
-    rpRatio: '',
-    pressureRatio: ''
+    ratedThrust: null,
+    bpRatio: null,
+    pressureRatio: null
   });
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'engineId' || name === 'engineType' ? value : Number(value)
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form data (will send to backend later):', formData);
+    console.log('Form data:', formData);
   };
 
   if (!isVisible) return null;
@@ -36,9 +39,9 @@ const NewModal = ({ isVisible, onClose }) => {
         </button>
         <h2 className="text-[30px] font-bold text-center">Add an Engine</h2>
         </div>
-        <h3 className="text-[20px] font-semibold mt-2 mb-4 text-center">Engine Information</h3>
         
-        <form onSubmit={handleSubmit} className="p-6 max-w-[450px] mx-auto">
+        <form onSubmit={handleSubmit} className="p-[20px] max-w-[450px] mx-auto">
+        <h3 className="text-[20px] font-semibold mt-2 mb-4 text-center">Engine Information</h3>
           <div className="mb-6">            
             <div className="mb-4">
               <label className="block text-sm font-medium mb-1">
@@ -61,7 +64,7 @@ const NewModal = ({ isVisible, onClose }) => {
               <input
                 type="text"
                 name="engineType"
-                value={formData.engineId}
+                value={formData.engineType}
                 onChange={handleChange}
                 className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 bg-[#f6f6f6]"
                 required
@@ -80,22 +83,26 @@ const NewModal = ({ isVisible, onClose }) => {
                 <input
                   type="number"
                   name="ratedThrust"
+                  min="0"
                   value={formData.ratedThrust}
                   onChange={handleChange}
                   className="w-full p-2 border rounded bg-[#f6f6f6]"
+                  required
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium mb-1">
-                  R/P Ratio
+                  B/P Ratio
                 </label>
                 <input
                   type="number"
-                  name="rpRatio"
-                  value={formData.rpRatio}
+                  name="bpRatio"
+                  min="0"
+                  value={formData.bpRatio}
                   onChange={handleChange}
                   className="w-full p-2 border rounded bg-[#f6f6f6]"
+                  required
                 />
               </div>
 
@@ -106,9 +113,11 @@ const NewModal = ({ isVisible, onClose }) => {
                 <input
                   type="number"
                   name="pressureRatio"
+                  min="0"
                   value={formData.pressureRatio}
                   onChange={handleChange}
                   className="w-full p-2 border rounded bg-[#f6f6f6]"
+                  required
                 />
               </div>
             </div>

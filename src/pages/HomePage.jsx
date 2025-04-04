@@ -22,7 +22,7 @@ const HomePage = () => {
             <Sidebar onAddEngineClick={() => setNewModalVisible(true)}/>
             <MainDisplay style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div className="message">
-                    <h2>Houston, We Need an Engine</h2>
+                    <h2 className="heading2">Houston, We Need an Engine</h2>
                     <p className="description">Select an engine or add a new one to begin emission prediction.</p>
                 </div>
                 <NewModal isVisible={newModalVisible} onClose={() => setNewModalVisible(false)}/>
