@@ -5,3 +5,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+input[type="number"]:hover::-webkit-inner-spin-button {
+  opacity: 0.7;
+}
