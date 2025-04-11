@@ -4,8 +4,8 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import MainDisplay from '../components/MainDisplay/MainDisplay';
 import { useEffect, useState } from 'react';
 import useUserStore from '../store/UserStore';
-import { handleGetUserData } from '../handlers/user-handler';
 import NewModal from './AddNewModal';
+import { handleGetEngines } from '../handlers/user-handler';
 
 const HomePage = () => {
     const { userId } = useUserStore();
@@ -13,7 +13,7 @@ const HomePage = () => {
 
     useEffect(() => {
         if (userId) {
-            handleGetUserData(userId);
+            handleGetEngines(userId);
         }
     }, [userId]);
 

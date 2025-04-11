@@ -8,7 +8,7 @@ const useUserStore = create((set) => ({
     // Initial state
     userId: localStorage.getItem("user_id") || null,
     user: null,
-    userData: {},
+    engines: [],
     loading: false,
     error: null,
     errorCode: null,
@@ -20,13 +20,18 @@ const useUserStore = create((set) => ({
     setNavigate: (navigate) => set({ navigate }),
     setUserId: (userId) => set({ userId }),
     setUser: (user) => set({ user }),
-    setUserData: (userId, data) =>
-        set((state) => ({
-            userData: {
-                ...state.userData,
-                [userId]: { engines: data.engines || [] },
-            },
-        })),
+    setEngines: (data) =>
+        set((state) => {
+          const updatedEngines = new Map(state.engines.map(engine => [engine.engine_identification, engine]));
+      
+          (data.engines || []).forEach((engine) => {
+            updatedEngines.set(engine.engine_identification, engine);
+          });
+      
+          return {
+            engines: Array.from(updatedEngines.values()),
+          };
+        }),
     setLoading: (loading) => set({ loading }),
     setError: (error) => set({ error }),
     setValidUser: (validUser) => set({ validUser })

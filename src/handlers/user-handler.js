@@ -5,14 +5,14 @@
  */
 
 import useUserStore from "../store/UserStore";
-import { createUser, getUser, getUserData } from "../services/user-service";
+import { createUser, getUser, getEngines } from "../services/user-service";
 
 const { 
     setUserId,
     setError, 
     setLoading,
     setUser,
-    setUserData,
+    setEngines,
     setNavigate,
     setErrorCode,
 }  = useUserStore.getState();
@@ -60,13 +60,13 @@ export const handleGetUser = async (userId) => {
     setLoading(false);
 }
 
-export const handleGetUserData = async (userId) => {
+export const handleGetEngines = async (userId) => {
     setLoading(true);
     setError(false);
     
-    const result = await getUserData(userId);
+    const result = await getEngines(userId);
     if (result.success) {
-        setUserData(userId, result.data);
+        setEngines(result.data);
     } else {
         setError(true);
     }

@@ -23,9 +23,9 @@ export const getUser = async (userId) => {
     }
 }
 
-export const getUserData = async (userId) => {
+export const getEngines = async (userId) => {
     try {
-        const response = await axiosInstance.get(`get_user/${userId}`);
+        const response = await axiosInstance.get(`get-engines/${userId}`);
         return { success: true, data: response.data };
     } catch (error) {
         return { success: false, error: error.response?.data };
