@@ -1,9 +1,9 @@
 import CSS from './Sidebar.module.css';
 
-const Sidebar = () => {
+const Sidebar = ({ onAddEngineClick }) => {
     return (
         <div id={CSS.sidebar}>
-            <button id={CSS.addEngineButton}>Add Engine</button>
+            <button id={CSS.addEngineButton} onClick={onAddEngineClick}>Add Engine</button>
             <p className={CSS.label}>Engines</p>
         </div> 
     );
