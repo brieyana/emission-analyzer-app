@@ -5,7 +5,7 @@
  */
 
 import useUserStore from "../store/UserStore";
-import { createUser, getUser, getEngines } from "../services/user-service";
+import { createUser, addEngine, getUser, getEngines } from "../services/user-service";
 
 const { 
     setUserId,
@@ -30,6 +30,22 @@ export const handleCreateUser = async () => {
         setUser(result.data);
         setNavigate(true);
         localStorage.setItem("user_id", uuid);
+    } else {
+        setError(true);
+    }
+
+    setLoading(false);
+}
+
+export const handleAddEngine = async (data) => {
+    setLoading(true);
+    setError(false);
+    setErrorCode(null);
+
+    const result = await addEngine(JSON.stringify(data));
+    if (result.success) {
+        setError(false);
+
     } else {
         setError(true);
     }

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import useUserStore from '../store/UserStore';
+import { handleAddEngine } from '../handlers/user-handler';
 
 const EngineForm = ({ isVisible, onClose }) => {
   const { userId, formTitle } = useUserStore();
@@ -21,9 +22,8 @@ const EngineForm = ({ isVisible, onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const parsedData = {
+  const handleSubmit = () => {
+    const data = {
       user_id: userId,
       engine: {
         engine_identification: formData.engine_identification,
@@ -32,9 +32,11 @@ const EngineForm = ({ isVisible, onClose }) => {
         bp_ratio: parseFloat(formData.bp_ratio),
         pressure_ratio: parseFloat(formData.pressure_ratio),
       }
-    };
-    console.log('Form data:', parsedData);
+  };
 
+  if (formTitle == "Add Engine") {
+      handleAddEngine(data);
+    }
   };
 
   if (!isVisible) return null;
