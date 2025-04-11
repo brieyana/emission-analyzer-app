@@ -4,22 +4,28 @@ const NewModal = ({ isVisible, onClose }) => {
   const [formData, setFormData] = useState({
     engineId: '',
     engineType: '',
-    ratedThrust: null,
-    bpRatio: null,
-    pressureRatio: null
+    ratedThrust: '',
+    bpRatio: '',
+    pressureRatio: ''
   });
   
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: name === 'engineId' || name === 'engineType' ? value : Number(value)
+      [name]: value
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form data:', formData);
+    const parsedData = {
+      ...formData,
+      ratedThrust: parseFloat(formData.ratedThrust),
+      bpRatio: parseFloat(formData.bpRatio),
+      pressureRatio: parseFloat(formData.pressureRatio),
+    };
+    console.log('Form data:', parsedData);
   };
 
   if (!isVisible) return null;
@@ -83,6 +89,7 @@ const NewModal = ({ isVisible, onClose }) => {
                 <input
                   type="number"
                   name="ratedThrust"
+                  step="0.01"
                   min="0"
                   value={formData.ratedThrust}
                   onChange={handleChange}
@@ -98,6 +105,7 @@ const NewModal = ({ isVisible, onClose }) => {
                 <input
                   type="number"
                   name="bpRatio"
+                  step="0.01"
                   min="0"
                   value={formData.bpRatio}
                   onChange={handleChange}
@@ -113,6 +121,7 @@ const NewModal = ({ isVisible, onClose }) => {
                 <input
                   type="number"
                   name="pressureRatio"
+                  step="0.01"
                   min="0"
                   value={formData.pressureRatio}
                   onChange={handleChange}
