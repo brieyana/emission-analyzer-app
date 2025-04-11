@@ -14,8 +14,12 @@ const useUserStore = create((set) => ({
     errorCode: null,
     validUser: false,
     navigate: false,
+    formVisible: false,
+    formTitle: '',
 
     // Setters
+    setFormTitle: (formTitle) => set({ formTitle }),
+    setFormVisible: (formVisible) => set({ formVisible }),
     setErrorCode: (errorCode) => set({ errorCode }),
     setNavigate: (navigate) => set({ navigate }),
     setUserId: (userId) => set({ userId }),

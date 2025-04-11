@@ -1,12 +1,16 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import useUserStore from '../store/UserStore';
 
-const NewModal = ({ isVisible, onClose }) => {
+const EngineForm = ({ isVisible, onClose }) => {
+  const { userId, formTitle } = useUserStore();
+
   const [formData, setFormData] = useState({
-    engineId: '',
-    engineType: '',
-    ratedThrust: '',
-    bpRatio: '',
-    pressureRatio: ''
+    engine_identification: '',
+    engine_type: '',
+    rated_thrust: '',
+    bp_ratio: '',
+    pressure_ratio: ''
   });
   
   const handleChange = (e) => {
@@ -20,12 +24,17 @@ const NewModal = ({ isVisible, onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const parsedData = {
-      ...formData,
-      ratedThrust: parseFloat(formData.ratedThrust),
-      bpRatio: parseFloat(formData.bpRatio),
-      pressureRatio: parseFloat(formData.pressureRatio),
+      user_id: userId,
+      engine: {
+        engine_identification: formData.engine_identification,
+        engine_type: formData.engine_type,
+        rated_thrust: parseFloat(formData.rated_thrust),
+        bp_ratio: parseFloat(formData.bp_ratio),
+        pressure_ratio: parseFloat(formData.pressure_ratio),
+      }
     };
     console.log('Form data:', parsedData);
+
   };
 
   if (!isVisible) return null;
@@ -35,7 +44,7 @@ const NewModal = ({ isVisible, onClose }) => {
       className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-50"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="w-[600px] bg-white rounded-lg shadow-xl overflow-hidden">
+      <div className="w-[600px] bg-white rounded-lg shadow-xl text-black overflow-hidden">
         <div className="relative p-4 mt-2 top-6">
         <button 
           onClick={onClose} 
@@ -43,7 +52,7 @@ const NewModal = ({ isVisible, onClose }) => {
         >
           ✕
         </button>
-        <h2 className="text-[30px] font-bold text-center">Add an Engine</h2>
+        <h2 className="text-[30px] font-bold text-center">{formTitle}</h2>
         </div>
         
         <form onSubmit={handleSubmit} className="p-[20px] max-w-[450px] mx-auto">
@@ -55,8 +64,8 @@ const NewModal = ({ isVisible, onClose }) => {
               </label>
               <input
                 type="text"
-                name="engineId"
-                value={formData.engineId}
+                name="engine_identification"
+                value={formData.engine_identification}
                 onChange={handleChange}
                 className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 bg-[#f6f6f6]"
                 required
@@ -69,8 +78,8 @@ const NewModal = ({ isVisible, onClose }) => {
               </label>
               <input
                 type="text"
-                name="engineType"
-                value={formData.engineType}
+                name="engine_type"
+                value={formData.engine_type}
                 onChange={handleChange}
                 className="w-full p-2 border rounded focus:ring-2 focus:ring-blue-500 bg-[#f6f6f6]"
                 required
@@ -81,17 +90,17 @@ const NewModal = ({ isVisible, onClose }) => {
           <div className="mb-6 justify-between">
             <h3 className="text-[20px] font-semibold mb-4 text-center">Operational Parameters</h3>
             
-            <div className="grid grid-cols-3 gap-[40px]">
+            <div className="flex gap-[40px]">
               <div>
                 <label className="block text-sm font-medium mb-1">
-                  Rated Thrust (kN)
+                  Rated Thrust
                 </label>
                 <input
                   type="number"
-                  name="ratedThrust"
+                  name="rated_thrust"
                   step="0.01"
                   min="0"
-                  value={formData.ratedThrust}
+                  value={formData.rated_thrust}
                   onChange={handleChange}
                   className="w-full p-2 border rounded bg-[#f6f6f6]"
                   required
@@ -104,10 +113,10 @@ const NewModal = ({ isVisible, onClose }) => {
                 </label>
                 <input
                   type="number"
-                  name="bpRatio"
+                  name="bp_ratio"
                   step="0.01"
                   min="0"
-                  value={formData.bpRatio}
+                  value={formData.bp_ratio}
                   onChange={handleChange}
                   className="w-full p-2 border rounded bg-[#f6f6f6]"
                   required
@@ -120,10 +129,10 @@ const NewModal = ({ isVisible, onClose }) => {
                 </label>
                 <input
                   type="number"
-                  name="pressureRatio"
+                  name="pressure_ratio"
                   step="0.01"
                   min="0"
-                  value={formData.pressureRatio}
+                  value={formData.pressure_ratio}
                   onChange={handleChange}
                   className="w-full p-2 border rounded bg-[#f6f6f6]"
                   required
@@ -144,4 +153,4 @@ const NewModal = ({ isVisible, onClose }) => {
   );
 };
 
-export default NewModal;
+export default EngineForm;

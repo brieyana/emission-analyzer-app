@@ -1,13 +1,14 @@
 import CSS from './Sidebar.module.css';
 import EngineCard from '../EngineCard';
 import useUserStore from '../../store/UserStore';
+import AddEngineButton from '../AddEngineButton';
 
-const Sidebar = ({ onAddEngineClick }) => {
+const Sidebar = () => {
     const { engines } = useUserStore();
 
     return (
         <div id={CSS.sidebar}>
-            <button id={CSS.addEngineButton} onClick={onAddEngineClick}>Add Engine</button>
+            <AddEngineButton />
             <p className={CSS.label}>Engines</p>
             {engines.map((engine) => (
                 <EngineCard key={engine.engine_identification} engineId={engine.engine_identification} />
