@@ -5,17 +5,22 @@
  */
 
 import useUserStore from "../store/UserStore";
-import { createUser, addEngine, getUser, getEngines } from "../services/user-service";
+import { createUser, addEngine, editEngine, getUser, getEngines, getEngineTypes } from "../services/user-service";
+import useAppStore from "../store/AppStore";
 
 const { 
     setUserId,
-    setError, 
-    setLoading,
     setUser,
     setEngines,
+}  = useUserStore.getState();
+
+const {
+    setError, 
+    setLoading,
     setNavigate,
     setErrorCode,
-}  = useUserStore.getState();
+    setEngineTypes,
+}  = useAppStore.getState();
 
 export const handleCreateUser = async () => {
     setLoading(true);
@@ -53,6 +58,21 @@ export const handleAddEngine = async (data) => {
     setLoading(false);
 }
 
+export const handleEditEngine = async (data) => {
+    setLoading(true);
+    setError(false);
+    setErrorCode(null);
+
+    const result = await editEngine(JSON.stringify(data));
+    if (result.success) {
+        setError(false);
+    } else {
+        setError(true);
+    }
+
+    setLoading(false);
+}
+
 export const handleGetUser = async (userId) => {
     setLoading(true);
     setError(false);
@@ -83,6 +103,20 @@ export const handleGetEngines = async (userId) => {
     const result = await getEngines(userId);
     if (result.success) {
         setEngines(result.data);
+    } else {
+        setError(true);
+    }
+
+    setLoading(false);
+}
+
+export const handleGetEngineTypes = async () => {
+    setLoading(true);
+    setError(false);
+
+    const result = await getEngineTypes()
+    if (result.success) {
+        setEngineTypes(result.data["engine_types"])
     } else {
         setError(true);
     }

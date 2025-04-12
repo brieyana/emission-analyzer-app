@@ -2,8 +2,21 @@
 import "../assets/styles.css"
 import edit from "../assets/images/edit.png";
 import { useNavigate } from "react-router-dom";
+import useUserStore from "../store/UserStore";
+import useAppStore from "../store/AppStore";
+import { FORM_MODE } from "../store/AppStore";
 
 const EngineCard = ({ engineId }) => {
+    const { engines } = useUserStore();
+
+    const { 
+        setFormTitle, 
+        setFormVisible, 
+        setEngineId, 
+        setInitialFormState,
+        setFormMode,
+    } = useAppStore();
+
     const nav = useNavigate();
 
     const handleClick = () => {
@@ -12,7 +25,11 @@ const EngineCard = ({ engineId }) => {
 
     const handleEditClick = (event) => {
         event.stopPropagation();
-        alert(`Edit Engine ${engineId}`)
+        setEngineId(engineId);
+        setFormTitle(`Edit ${engineId}`)
+        setInitialFormState(engines.find((engine) => engine.engine_identification === engineId))
+        setFormVisible(true);
+        setFormMode(FORM_MODE.EDIT)
     }
 
     return (

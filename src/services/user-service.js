@@ -23,6 +23,15 @@ export const addEngine = async (data) => {
     }
 }
 
+export const editEngine = async (data) => {
+    try {
+        const response = await axiosInstance.put(`/edit_engine`, data);
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, error: error.response?.data }
+    }
+}
+
 export const getUser = async (userId) => {
     try {
         const response = await axiosInstance.get(`/get_user/${userId}`);
@@ -35,6 +44,15 @@ export const getUser = async (userId) => {
 export const getEngines = async (userId) => {
     try {
         const response = await axiosInstance.get(`get-engines/${userId}`);
+        return { success: true, data: response.data };
+    } catch (error) {
+        return { success: false, error: error.response?.data };
+    }
+}
+
+export const getEngineTypes = async () => {
+    try {
+        const response = await axiosInstance.get(`get_engine_types`);
         return { success: true, data: response.data };
     } catch (error) {
         return { success: false, error: error.response?.data };

@@ -5,16 +5,20 @@ import { useNavigate } from 'react-router-dom'
 import useUserStore from '../store/UserStore';
 import { handleCreateUser, handleGetUser } from '../handlers/user-handler';
 import { useEffect } from 'react';
+import useAppStore from '../store/AppStore';
 
 const LandingPage = () => {
   const nav = useNavigate();
   const { 
     userId, 
     user, 
-    loading, 
-    navigate, 
-    error
   } = useUserStore();
+
+  const {
+    loading,
+    navigate,
+    error
+  } = useAppStore();
 
   const handleClick = async () => {
     if (!userId) {

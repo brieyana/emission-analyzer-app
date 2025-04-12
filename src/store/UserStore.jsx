@@ -9,19 +9,8 @@ const useUserStore = create((set) => ({
     userId: localStorage.getItem("user_id") || null,
     user: null,
     engines: [],
-    loading: false,
-    error: null,
-    errorCode: null,
-    validUser: false,
-    navigate: false,
-    formVisible: false,
-    formTitle: '',
 
     // Setters
-    setFormTitle: (formTitle) => set({ formTitle }),
-    setFormVisible: (formVisible) => set({ formVisible }),
-    setErrorCode: (errorCode) => set({ errorCode }),
-    setNavigate: (navigate) => set({ navigate }),
     setUserId: (userId) => set({ userId }),
     setUser: (user) => set({ user }),
     setEngines: (data) =>
@@ -36,9 +25,6 @@ const useUserStore = create((set) => ({
             engines: Array.from(updatedEngines.values()),
           };
         }),
-    setLoading: (loading) => set({ loading }),
-    setError: (error) => set({ error }),
-    setValidUser: (validUser) => set({ validUser })
 }));
 
 export default useUserStore;
