@@ -5,17 +5,20 @@ import "./assets/reset.css"
 import './assets/styles.css';
 import { useEffect } from "react";
 import useUserStore from './store/UserStore';
-import { handleGetEngines } from './handlers/user-handler';
+import { handleGetEngines, handleGetEngineTypes } from './handlers/user-handler';
 import EngineForm from "./components/EngineForm";
+import useAppStore from "./store/AppStore";
 
 const Template = ({ children, style }) => {
-    const { userId, formVisible, setFormVisible } = useUserStore();
+    const { userId } = useUserStore();
+    const { formVisible } = useAppStore();
 
     useEffect(() => {
-        if (userId) {
+        if (userId && !formVisible) {
             handleGetEngines(userId);
+            handleGetEngineTypes();
         }
-    }, [userId]);
+    }, [userId, formVisible]);
 
     return (
         <div className="container">
@@ -23,7 +26,7 @@ const Template = ({ children, style }) => {
             <MainDisplay style={style}>
                 {children}
             </MainDisplay>
-            <EngineForm isVisible={formVisible} onClose={() => setFormVisible(false)} />    
+            <EngineForm />
         </div>
     )
 }

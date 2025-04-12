@@ -1,11 +1,25 @@
-import useUserStore from "../store/UserStore";
+import useAppStore from "../store/AppStore";
+import { FORM_MODE } from "../store/AppStore";
 
 const AddEngineButton = () => {
-    const { setFormVisible, setFormTitle } = useUserStore();
+    const { 
+        setFormVisible, 
+        setFormTitle, 
+        setInitialFormState, 
+        setFormMode, 
+        } = useAppStore();
 
     const handleClick = () => {
         setFormVisible(true);
         setFormTitle("Add Engine");
+        setInitialFormState({
+            engine_identification: "",
+            engine_type: "",
+            rated_thrust: "",
+            bp_ratio: "",
+            pressure_ratio: ""
+        });
+        setFormMode(FORM_MODE.ADD)
     }
 
     return (
