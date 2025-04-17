@@ -11,13 +11,23 @@ const useUserStore = create((set) => ({
     engines: [],
 
     // Setters
+    emissions: {},
+
+    // Setters
+    setEmissions: (engineId, predictions) =>
+        set((state) => ({
+          emissions: {
+            ...state.emissions,
+            [engineId]: predictions
+          }
+    })),
     setUserId: (userId) => set({ userId }),
     setUser: (user) => set({ user }),
-    setEngines: (data) =>
+    setEngines: (engines) =>
         set((state) => {
           const updatedEngines = new Map(state.engines.map(engine => [engine.engine_identification, engine]));
       
-          (data.engines || []).forEach((engine) => {
+          (engines || []).forEach((engine) => {
             updatedEngines.set(engine.engine_identification, engine);
           });
       
