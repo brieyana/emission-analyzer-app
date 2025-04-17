@@ -5,12 +5,13 @@ import "./assets/reset.css"
 import './assets/styles.css';
 import { useEffect } from "react";
 import useUserStore from './store/UserStore';
-import { handleGetEngines, handleGetEngineTypes } from './handlers/user-handler';
+import { handleGetEngines, handleGetEngineTypes, handlePredictEmissions } from './handlers/user-handler';
 import EngineForm from "./components/EngineForm";
 import useAppStore from "./store/AppStore";
+import Message from "./components/Message";
 
 const Template = ({ children, style }) => {
-    const { userId } = useUserStore();
+    const { userId, engines } = useUserStore();
     const { formVisible } = useAppStore();
 
     useEffect(() => {
@@ -20,6 +21,14 @@ const Template = ({ children, style }) => {
         }
     }, [userId, formVisible]);
 
+    useEffect(() => {
+        if (engines.length != 0) {
+            engines.forEach((engine) => {
+                handlePredictEmissions(engine.engine_identification, engine)
+            })
+        }
+    }, [engines])
+
     return (
         <div className="container">
             <Sidebar />
@@ -27,6 +36,7 @@ const Template = ({ children, style }) => {
                 {children}
             </MainDisplay>
             <EngineForm />
+            {formVisible ?  null : <Message />}
         </div>
     )
 }

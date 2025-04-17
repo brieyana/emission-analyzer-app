@@ -17,8 +17,12 @@ const useAppStore = create((set, get) => ({
     loading: false,
     error: null,
     errorCode: null,
+    success: false,
+    message: '',
 
     // Setters
+    setMessage: (message) => set({ message }),
+    setSuccess: (success) => set({ success }),
     setEngineId: (engineId) => set({ engineId }),
     setFormMode: (formMode) => set({ formMode }),
     setInitialFormState: (initialFormState) => set({ initialFormState }),

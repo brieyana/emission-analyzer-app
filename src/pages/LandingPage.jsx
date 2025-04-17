@@ -6,6 +6,7 @@ import useUserStore from '../store/UserStore';
 import { handleCreateUser, handleGetUser } from '../handlers/user-handler';
 import { useEffect } from 'react';
 import useAppStore from '../store/AppStore';
+import Message from '../components/Message';
 
 const LandingPage = () => {
   const nav = useNavigate();
@@ -16,8 +17,7 @@ const LandingPage = () => {
 
   const {
     loading,
-    navigate,
-    error
+    navigate
   } = useAppStore();
 
   const handleClick = async () => {
@@ -34,14 +34,9 @@ const LandingPage = () => {
     }
   }, [loading, user, navigate, nav])
 
-  useEffect(() => {
-    if (error) {
-      alert("Unable to verify/create user. Please try again.")
-    }
-  }, [error])
-
   return (
     <div id={CSS.landingPage}>
+      <Message />
       <div className={CSS.container}>
           <div id={CSS.navbar}>
               <p>LOGO</p>

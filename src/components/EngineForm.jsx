@@ -7,6 +7,7 @@ import OperationalParameter from "./FormInput/OperationalParameter";
 import { OPERATIONAL_PARAMETERS } from "../assets/constants";
 import useAppStore from "../store/AppStore";
 import { FORM_MODE } from "../store/AppStore";
+import Message from "./Message";
 
 const EngineForm = () => {
     const {
@@ -19,6 +20,7 @@ const EngineForm = () => {
         formTitle, 
         initialFormState,
         formMode,
+        success
     } = useAppStore();
 
     const [formData, setFormData] = useState({});
@@ -26,6 +28,12 @@ const EngineForm = () => {
     useEffect(() => {
         setFormData(initialFormState)
     }, [initialFormState])
+
+    useEffect(() => {
+        if (success && formMode == FORM_MODE.ADD) {
+            setFormData(initialFormState);
+        }
+    }, [formMode, initialFormState, success])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -54,7 +62,6 @@ const EngineForm = () => {
 
         if (formMode === FORM_MODE.ADD) {
             handleAddEngine(data);
-            setFormData(initialFormState)
         }
         
         if (formMode === FORM_MODE.EDIT) {
@@ -66,6 +73,7 @@ const EngineForm = () => {
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-50" onClick={(e) => e.target === e.currentTarget && handleClose}>
+            <Message />
             <div className="w-[600px] bg-white rounded-lg shadow-xl text-black overflow-hidden">
                 <div className="relative p-4 mt-2 top-6">
                     <button className="absolute right-4 top-1/2 -translate-y-14 text-gray-500 hover:text-black text-xl" onClick={handleClose}>
