@@ -19,8 +19,10 @@ const useAppStore = create((set, get) => ({
     errorCode: null,
     success: false,
     message: '',
+    engineDeleted: false,
 
     // Setters
+    setEngineDeleted: (engineDeleted) => set({ engineDeleted }),
     setMessage: (message) => set({ message }),
     setSuccess: (success) => set({ success }),
     setEngineId: (engineId) => set({ engineId }),

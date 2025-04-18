@@ -5,7 +5,7 @@
  */
 
 import useUserStore from "../store/UserStore";
-import { createUser, addEngine, editEngine, getUser, getEngines, getEngineTypes, predictEmissions } from "../services/user-service";
+import { createUser, addEngine, editEngine, getUser, getEngines, getEngineTypes, predictEmissions, deleteEngine } from "../services/user-service";
 import useAppStore from "../store/AppStore";
 
 const { 
@@ -22,7 +22,8 @@ const {
     setErrorCode,
     setEngineTypes,
     setSuccess,
-    setMessage
+    setMessage,
+    setEngineDeleted
 }  = useAppStore.getState();
 
 export const handleCreateUser = async () => {
@@ -98,6 +99,7 @@ export const handleGetUser = async (userId) => {
             localStorage.removeItem("user_id");
             setErrorCode(404);
         }
+        setMessage("Unable to retrieve user. Please try again.")
     }
 
     setLoading(false);
@@ -149,4 +151,27 @@ export const handlePredictEmissions = async (userId, engineId) => {
     }
 
     setLoading(false);
+}
+
+export const handleDeleteEngine = async (userId, engineId) => {
+    setLoading(true);
+    setError(false);
+    setEngineDeleted(false);
+
+    const data = {
+        userId: userId,
+        engineId: engineId
+    }
+
+    const result = await deleteEngine(data);
+
+    if (result.success) {
+        setEngineDeleted(true);
+        setSuccess(true);
+        setMessage(`${engineId} deleted`);
+
+    } else {
+        setError(true);
+        setMessage(`${engineId} could not be deleted`)
+    }
 }
