@@ -132,14 +132,13 @@ export const handleGetEngineTypes = async () => {
     setLoading(false);
 }
 
-export const handlePredictEmissions = async (engineId, engine) => {
+export const handlePredictEmissions = async (userId, engineId) => {
     setLoading(true);
     setError(false);
 
     const data = {
-        rated_thrust: engine.rated_thrust,
-        bp_ratio: engine.bp_ratio,
-        pressure_ratio: engine.pressure_ratio
+        user_id: userId,
+        engine_identification: engineId
     }
 
     const result = await predictEmissions(data)

@@ -11,7 +11,7 @@ import useAppStore from "./store/AppStore";
 import Message from "./components/Message";
 
 const Template = ({ children, style }) => {
-    const { userId, engines } = useUserStore();
+    const { userId, engines, emissions } = useUserStore();
     const { formVisible } = useAppStore();
 
     useEffect(() => {
@@ -24,10 +24,14 @@ const Template = ({ children, style }) => {
     useEffect(() => {
         if (engines.length != 0) {
             engines.forEach((engine) => {
-                handlePredictEmissions(engine.engine_identification, engine)
+                handlePredictEmissions(userId, engine.engine_identification)
             })
         }
-    }, [engines])
+    }, [userId, engines])
+
+    useEffect(() => {
+        console.log(emissions)
+    }, [emissions])
 
     return (
         <div className="container">
