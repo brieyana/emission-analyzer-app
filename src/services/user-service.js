@@ -69,3 +69,12 @@ export const predictEmissions = async (data) => {
         return { success: false, error: error.response?.data };
     }
 }
+
+export const deleteEngine = async (data) => {
+    try {
+        await axiosInstance.delete(`delete_engine/${data.userId}/engines/${data.engineId}`)
+        return { success: true }
+    } catch (error) {
+        return { success: false, error: error.response?.data };
+    }
+}

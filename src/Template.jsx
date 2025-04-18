@@ -11,8 +11,8 @@ import useAppStore from "./store/AppStore";
 import Message from "./components/Message";
 
 const Template = ({ children, style }) => {
-    const { userId, engines, emissions } = useUserStore();
-    const { formVisible } = useAppStore();
+    const { userId, engines } = useUserStore();
+    const { formVisible, engineDeleted } = useAppStore();
 
     useEffect(() => {
         if (userId && !formVisible) {
@@ -30,8 +30,10 @@ const Template = ({ children, style }) => {
     }, [userId, engines])
 
     useEffect(() => {
-        console.log(emissions)
-    }, [emissions])
+        if (engineDeleted) {
+            handleGetEngines(userId);
+        }
+    }, [userId, engineDeleted])
 
     return (
         <div className="container">

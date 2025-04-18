@@ -24,16 +24,16 @@ const useUserStore = create((set) => ({
     setUserId: (userId) => set({ userId }),
     setUser: (user) => set({ user }),
     setEngines: (engines) =>
-        set((state) => {
-          const updatedEngines = new Map(state.engines.map(engine => [engine.engine_identification, engine]));
-      
-          (engines || []).forEach((engine) => {
+        set(() => {
+          const updatedEngines = new Map();
+
+        (engines || []).forEach((engine) => {
             updatedEngines.set(engine.engine_identification, engine);
-          });
-      
-          return {
+        });
+
+        return {
             engines: Array.from(updatedEngines.values()),
-          };
+        };
         }),
 }));
 
