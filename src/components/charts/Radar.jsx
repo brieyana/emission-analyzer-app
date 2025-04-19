@@ -1,26 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Plot from "react-plotly.js";
-import useUserStore from "../../store/UserStore"; // adjust path if needed
+import useUserStore from "../../store/UserStore";
 
 const RadarChart = ({ engineId }) => {
   const { emissions } = useUserStore();
-  const predictions = emissions[engineId];
+  const predictions = emissions[engineId]?.predictions;
+  const plotRef = useRef(null);
 
   useEffect(() => {
-    console.log("Predictions for engineId:", engineId, predictions);
-    if (predictions) {
-      console.log("CO prediction object:", predictions.CO);
-      console.log("NOX prediction object:", predictions.NOX);
-
-      console.log("CO Confidence raw:", predictions.CO?.Confidence);
-      console.log("NOX Confidence raw:", predictions.NOX?.Confidence);
-
-      console.log("Type of CO Confidence:", typeof predictions.CO?.Confidence);
-      console.log("Type of NOX Confidence:", typeof predictions.NOX?.Confidence);
+    if (plotRef.current) {
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 100);
     }
-  }, [engineId, predictions]);
+  }, [engineId]);
 
-  
   if (!predictions) {
     return (
       <div className="p-4 rounded-2xl shadow-lg bg-white w-full max-w-2xl mx-auto">
@@ -29,7 +23,7 @@ const RadarChart = ({ engineId }) => {
     );
   }
 
-  const levels = ["Low", "Moderate", "High", "Very High"];
+  const levels = ["Low", "Very High", "High", "Moderate"];
 
   const formatTrace = (label, color) => {
     const confidences = levels.map(level => predictions[label]?.Confidence[level] || 0);
@@ -40,6 +34,7 @@ const RadarChart = ({ engineId }) => {
       type: "scatterpolar",
       r: confidences,
       theta: labels,
+      hoveron: "points",
       fill: "toself",
       name: label,
       line: { color }
@@ -52,6 +47,7 @@ const RadarChart = ({ engineId }) => {
   ];
 
   const layout = {
+    autosize: true,
     polar: {
       radialaxis: {
         visible: true,
@@ -59,13 +55,26 @@ const RadarChart = ({ engineId }) => {
       }
     },
     showlegend: true,
-    margin: { t: 30, b: 30, l: 30, r: 30 }
+    margin: { t: 30, b: 30, l: 30, r: 30 },
+    dragmode: "pan"
   };
 
   return (
-    <div className="content-center">
+    <div className="w-full max-w-2xl mx-auto">
       <h2 className="text-xl font-bold mb-4 text-center">Confidence Radar Chart</h2>
-      <Plot data={data} layout={layout} config={{ responsive: true }} />
+      <Plot
+        data={data}
+        layout={layout}
+        config={{ 
+          responsive: true,
+          displayModeBar: false,
+          scrollZoom: false,
+        }}
+        useResizeHandler
+        style={{ width: "100%", height: "100%" }}
+        ref={plotRef}
+        
+      />
     </div>
   );
 };
