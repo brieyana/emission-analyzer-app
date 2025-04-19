@@ -4,6 +4,7 @@ import "../components/ParameterCard";
 import ParameterCard from "../components/ParameterCard";
 import { useParams } from "react-router-dom";
 import useUserStore from "../store/UserStore";
+import Radar from "../components/charts/Radar"
 
 const EnginePage = () => {
     const { engines } = useUserStore();
@@ -22,6 +23,7 @@ const EnginePage = () => {
                             <ParameterCard parameter="Pressure Ratio" value={engine.pressure_ratio} />
                         </div>
                     </div>
+                    <Radar engineId={engineId} />
                 </div>
             </div>
         </Template>
