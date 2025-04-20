@@ -14,7 +14,7 @@ const RadarChart = ({ engineId }) => {
       }, 100);
     }
   }, [engineId]);
-
+console.log(engineId,predictions)
   if (!predictions) {
     return (
       <div className="p-4 rounded-2xl shadow-lg bg-white w-full max-w-2xl mx-auto">
@@ -26,6 +26,7 @@ const RadarChart = ({ engineId }) => {
   const levels = ["Low", "Very High", "High", "Moderate"];
 
   const formatTrace = (label, color) => {
+    const className = predictions[label]?.Class || "Unknown";
     const confidences = levels.map(level => predictions[label]?.Confidence[level] || 0);
     confidences.push(confidences[0]);
     const labels = [...levels, levels[0]];
@@ -56,7 +57,9 @@ const RadarChart = ({ engineId }) => {
     },
     showlegend: true,
     margin: { t: 30, b: 30, l: 30, r: 30 },
-    dragmode: "pan"
+    dragmode: "pan",
+    paper_bgcolor: "transparent",
+    plot_bgcolor: "transparent",
   };
 
   return (
@@ -73,7 +76,6 @@ const RadarChart = ({ engineId }) => {
         useResizeHandler
         style={{ width: "100%", height: "100%" }}
         ref={plotRef}
-        
       />
     </div>
   );
