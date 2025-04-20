@@ -4,6 +4,7 @@ import "../components/ParameterCard";
 import ParameterCard from "../components/ParameterCard";
 import { useParams } from "react-router-dom";
 import useUserStore from "../store/UserStore";
+import Radar from "../components/charts/Radar"
 
 const EnginePage = () => {
     const { engines } = useUserStore();
@@ -15,11 +16,14 @@ const EnginePage = () => {
             <div className="flex flex-col w-full items-center gap-8">
                 <h2 className="font-bold text-center font-[Inter] text-3xl mt-[50px]">{engine.engine_identification}</h2>
                 <div className="flex flex-col w-full items-center">
-                    <div className="flex flex-col w-full">
+                    <div className="flex flex-col w-full gap-4">
                         <div className={`flex justify-between ${CSS.container}`}>
                             <ParameterCard parameter="Rated Thrust (kN)" value={engine.rated_thrust} />
                             <ParameterCard parameter="B/P Ratio" value={engine.bp_ratio} />
                             <ParameterCard parameter="Pressure Ratio" value={engine.pressure_ratio} />
+                        </div>
+                        <div className={`${CSS.container} min-h-[530px] h-[530px]`}>
+                            <Radar engineId={engineId}/>
                         </div>
                     </div>
                 </div>
