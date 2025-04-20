@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useRef } from "react";
 import Plot from "react-plotly.js";
 import useUserStore from "../../store/UserStore";
@@ -14,7 +15,6 @@ const RadarChart = ({ engineId }) => {
       }, 100);
     }
   }, [engineId]);
-console.log(engineId,predictions)
   if (!predictions) {
     return (
       <div className="p-4 rounded-2xl shadow-lg bg-white w-full max-w-2xl mx-auto">
@@ -26,7 +26,6 @@ console.log(engineId,predictions)
   const levels = ["Low", "Very High", "High", "Moderate"];
 
   const formatTrace = (label, color) => {
-    const className = predictions[label]?.Class || "Unknown";
     const confidences = levels.map(level => predictions[label]?.Confidence[level] || 0);
     confidences.push(confidences[0]);
     const labels = [...levels, levels[0]];
@@ -64,7 +63,7 @@ console.log(engineId,predictions)
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <h2 className="text-xl font-bold mb-4 text-center">Confidence Radar Chart</h2>
+      <h3 className="font-bold mb-4">Confidence Radar Chart</h3>
       <Plot
         data={data}
         layout={layout}

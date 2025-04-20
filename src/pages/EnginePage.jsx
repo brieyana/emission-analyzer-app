@@ -23,7 +23,7 @@ const EnginePage = () => {
                             <ParameterCard parameter="Pressure Ratio" value={engine.pressure_ratio} />
                         </div>
                         <div className={`${CSS.container} min-h-[530px] h-[530px]`}>
-                        <Radar engineId={engineId}/>
+                            <Radar engineId={engineId}/>
                         </div>
                     </div>
                 </div>
