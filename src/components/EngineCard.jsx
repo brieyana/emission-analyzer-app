@@ -17,12 +17,20 @@ const EngineCard = ({ engineId }) => {
         setEngineId, 
         setInitialFormState,
         setFormMode,
+        compareClicked,
+        selectedEngineIds,
+        toggleEngineSelection
     } = useAppStore();
 
     const nav = useNavigate();
+    const isSelected = selectedEngineIds.includes(engineId);
 
     const handleClick = () => {
-        nav(`/home/${engineId}`)
+        if (compareClicked) {
+            toggleEngineSelection(engineId);
+        } else {
+            nav(`/home/${engineId}`)
+        }
     }
 
     const handleEditClick = (event) => {
@@ -40,11 +48,33 @@ const EngineCard = ({ engineId }) => {
     }
 
     return (
-        <button onClick={handleClick} className="block flex items-center justify-between border border-[#dbdbdb] rounded-[5px] p-[20px]">
+        <button
+            onClick={handleClick}
+            className={`block flex items-center justify-between rounded-[5px] p-[20px] border ${
+                isSelected && compareClicked
+                    ? "bg-green-100 border-green-600"
+                    : "bg-white border-[#dbdbdb]"
+            }`}
+        >
             <p className="text-[0.8em] font-medium">{engineId}</p>
             <div className="flex">
-                <img onClick={handleEditClick} className="block w-[25px] p-[5px] hover:bg-[#e8e8e8] hover:rounded-[5px]" src={edit} />
-                <img onClick={handleDeleteClick} className="block w-[25px] p-[5px] hover:bg-[#e8e8e8] hover:rounded-[5px]" src={deleteIcon} />
+                <button
+                    disabled={compareClicked}
+                    className={`block w-[25px] p-[5px] ${
+                        compareClicked ? 'cursor-not-allowed' : 'hover:bg-[#e8e8e8] hover:rounded-[5px]'
+                    }`}
+                >
+                    <img onClick={handleEditClick} src={edit} />
+                </button>
+                
+                <button 
+                    disabled={compareClicked}
+                    className={`block w-[25px] p-[5px] ${
+                        compareClicked ? 'cursor-not-allowed' : 'hover:bg-[#e8e8e8] hover:rounded-[5px]'
+                    }`}
+                >
+                    <img onClick={handleDeleteClick} src={deleteIcon} />
+                </button>
             </div>
         </button>
     );

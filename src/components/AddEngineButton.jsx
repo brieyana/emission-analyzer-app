@@ -6,7 +6,8 @@ const AddEngineButton = () => {
         setFormVisible, 
         setFormTitle, 
         setInitialFormState, 
-        setFormMode, 
+        setFormMode,
+        compareClicked, 
         } = useAppStore();
 
     const handleClick = () => {
@@ -23,7 +24,13 @@ const AddEngineButton = () => {
     }
 
     return (
-        <button className="text-white bg-black py-3 px-4 rounded-md text-sm font-medium mb-12" onClick={handleClick}>
+        <button
+            disabled={compareClicked}
+            className={`text-white py-3 px-4 rounded-md text-sm font-medium ${
+                compareClicked ? 'bg-gray-300 cursor-not-allowed' : 'bg-black'
+            }`}
+            onClick={handleClick}
+        >
             Add Engine
         </button>
     );

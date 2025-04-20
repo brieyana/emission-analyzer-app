@@ -20,8 +20,18 @@ const useAppStore = create((set, get) => ({
     success: false,
     message: '',
     engineDeleted: false,
+    compareClicked: false,
+    selectedEngineIds: [],
 
     // Setters
+    toggleEngineSelection: (engineId) =>
+        set((state) => {
+            const selected = new Set(state.selectedEngineIds);
+            selected.has(engineId) ? selected.delete(engineId) : selected.add(engineId);
+            return { selectedEngineIds: Array.from(selected) };
+        }),
+    clearEngineSelections: () => set({ selectedEngineIds: [] }),
+    setCompareClicked: (compareClicked) => set({ compareClicked }),
     setEngineDeleted: (engineDeleted) => set({ engineDeleted }),
     setMessage: (message) => set({ message }),
     setSuccess: (success) => set({ success }),
