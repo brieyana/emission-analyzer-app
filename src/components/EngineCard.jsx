@@ -19,7 +19,8 @@ const EngineCard = ({ engineId }) => {
         setFormMode,
         compareClicked,
         selectedEngineIds,
-        toggleEngineSelection
+        toggleEngineSelection,
+        clearEngineSelections,
     } = useAppStore();
 
     const nav = useNavigate();
@@ -29,6 +30,10 @@ const EngineCard = ({ engineId }) => {
         if (compareClicked) {
             toggleEngineSelection(engineId);
         } else {
+            if (selectedEngineIds.length > 0) {
+                clearEngineSelections();
+            }
+            
             nav(`/home/${engineId}`)
         }
     }

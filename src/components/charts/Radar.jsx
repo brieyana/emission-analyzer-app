@@ -63,7 +63,7 @@ const RadarChart = ({ engineId }) => {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <h3 className="font-bold mb-4">Confidence Radar Chart</h3>
+      <h3 className="font-bold text-center mb-4">Confidence Radar Chart</h3>
       <Plot
         data={data}
         layout={layout}

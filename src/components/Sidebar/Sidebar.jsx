@@ -4,6 +4,7 @@ import useUserStore from '../../store/UserStore';
 import AddEngineButton from '../AddEngineButton';
 import useAppStore from '../../store/AppStore';
 import { useNavigate } from 'react-router-dom';
+import DownloadButton from '../DownloadButton';
 
 const Sidebar = () => {
     const nav = useNavigate();
@@ -45,7 +46,10 @@ const Sidebar = () => {
                     </button>
                 </div>
             )}
-            <p className={CSS.label}>Engines</p>
+            <div className="flex justify-between">
+                <p className={CSS.label}>Engines</p>
+                <DownloadButton />
+            </div>
             {engines.map((engine) => (
                 <EngineCard key={engine.engine_identification} engineId={engine.engine_identification} />
             ))}
