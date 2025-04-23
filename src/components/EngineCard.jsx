@@ -21,12 +21,15 @@ const EngineCard = ({ engineId }) => {
         selectedEngineIds,
         toggleEngineSelection,
         clearEngineSelections,
+        selectedEngine,
+        setSelectedEngine,
     } = useAppStore();
 
     const nav = useNavigate();
     const isSelected = selectedEngineIds.includes(engineId);
 
     const handleClick = () => {
+        setSelectedEngine(engineId);
         if (compareClicked) {
             toggleEngineSelection(engineId);
         } else {
@@ -50,6 +53,9 @@ const EngineCard = ({ engineId }) => {
     const handleDeleteClick = (event) => {
         event.stopPropagation();
         handleDeleteEngine(userId, engineId);
+        if (selectedEngine == engineId) {
+            nav(`/home`);
+        }
     }
 
     return (
