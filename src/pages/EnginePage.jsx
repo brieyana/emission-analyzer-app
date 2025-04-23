@@ -11,6 +11,19 @@ const EnginePage = () => {
     const { engineId } = useParams();
     const engine = engines.find((engine) => engine.engine_identification === engineId) || {};
 
+    if (Object.keys(engine).length === 0) {
+        return (
+            <Template style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className="flex flex-col w-full items-center">
+                    <h2 className="text-3xl font-bold text-center text-600">Engine Not Found</h2>
+                    <p className="mt-2 text-center text-gray-600">
+                        This engine is not associated with your account.
+                    </p>
+                </div>
+            </Template>
+        );
+    }
+
     return (
         <Template>
             <div className="flex flex-col w-full items-center gap-8">
