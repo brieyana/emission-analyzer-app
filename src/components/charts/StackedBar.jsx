@@ -5,22 +5,31 @@ import useUserStore from "../../store/UserStore";
 
 const levels = ["Low", "Moderate", "High", "Very High"];
 const colors = {
-  Low: "green",
-  Moderate: "yellow",
-  High: "red",
-  "Very High": "black",
+  Low: "#DDDBDE",
+  Moderate: "#CAD4DF",
+  High: "#656E77",
+  "Very High": "#3B373B",
 };
 
-const class_height = {
-  Low: 1,
-  Moderate: 2,
-  High: 3,
-  "Very High": 4,
+const bounds = {
+  CO: {
+    Low: [0, 25],
+    Moderate: [25, 60],
+    High: [60, 90],
+    "Very High": [90, 150],
+  },
+  NOX: {
+    Low: [0, 25],
+    Moderate: [25, 50],
+    High: [50, 75],
+    "Very High": [75, 150],
+  },
 };
 
 const StackedBarChart = () => {
   const selectedEngineIds = useAppStore((state) => state.selectedEngineIds);
   const { emissions } = useUserStore();
+  const { engines } = useUserStore();
 
   const traces = useMemo(() => {
     const tracesByLevel = levels.map((level) => ({
@@ -29,36 +38,51 @@ const StackedBarChart = () => {
       y: [],
       customdata: [],
       type: "bar",
-      marker: { color: colors[level] },
+    marker: {
+      color: colors[level],
+      opacity: 0.8,
+      line: {
+        color: "rgba(0, 0, 0, 0.25)",
+        width: 2,
+        },
+      },
       hovertemplate:
         "%{x}<br>" +
         "Level: %{fullData.name}<br>" +
-        "Confidence: %{customdata:.0%}<extra></extra>",
-    }));
+        "Emissions: %{customdata[0]}g<br>" +
+        "Confidence: %{customdata[1]:.0%}<extra></extra>",
+      }));
   
+    
     selectedEngineIds.forEach((engineId) => {
       const prediction = emissions[engineId]?.predictions;
-      if (!prediction) return;
+      const engine = engines.find((e) => e.engine_identification === engineId);
+      const ratedThrust = engine?.rated_thrust;
+  
+      if (!prediction || !ratedThrust) return;
   
       ["CO", "NOX"].forEach((pollutant) => {
         const label = `${engineId}-${pollutant}`;
         const pollutantData = prediction[pollutant];
-  
-        if (!pollutantData?.Class || !pollutantData?.Confidence) return;
-  
-        const totalHeight = class_height[pollutantData.Class] || 0;
+        
+        if (!pollutantData?.Confidence) return;
         levels.forEach((level, index) => {
           const conf = pollutantData.Confidence[level] || 0;
-          const height = conf * totalHeight;
-          tracesByLevel[index].x.push(label);
-          tracesByLevel[index].y.push(height);
-          tracesByLevel[index].customdata.push(conf);
+          const [lower, upper] = bounds[pollutant][level];
+          const avgBound = (upper + lower) / 2;
+          const emissionsInGrams = avgBound * conf * ratedThrust;
+  
+          if (emissionsInGrams > 0) {
+            tracesByLevel[index].x.push(label);
+            tracesByLevel[index].y.push(emissionsInGrams);
+            tracesByLevel[index].customdata.push([emissionsInGrams.toFixed(2), conf]);
+          }
         });
       });
     });
   
     return tracesByLevel;
-  }, [selectedEngineIds, emissions]);
+  }, [selectedEngineIds, emissions, engines]);
   
   return (
     <div className="w-full max-w-4xl mx-auto">
@@ -72,11 +96,16 @@ const StackedBarChart = () => {
             tickangle: 0,
           },
           yaxis: {
-            tickmode: "array",
-            tickvals: [1, 2, 3, 4],
-            ticktext: ["Low", "Moderate", "High", "Very High"],
-            range: [0, 4],
-          },
+            title: {
+              text: "Emissions (grams)",
+              font: {
+                size: 14,
+              },
+              standoff: 20,
+            },
+            rangemode: "tozero",
+            tickformat: ",d",          
+          },          
           legend: { orientation: "h" },
           margin: { t: 20, b: 80, l: 80, r: 20 },
           autosize: true,
