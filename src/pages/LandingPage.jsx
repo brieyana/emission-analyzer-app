@@ -37,20 +37,19 @@ const LandingPage = () => {
   return (
     <div id={CSS.landingPage}>
       <Message />
-      <div className={CSS.container}>
-          <div id={CSS.navbar}>
-              <p>LOGO</p>
-              <button onClick={handleClick} className={CSS.button}>Get started</button>
-          </div>
-  
-          <div id={CSS.mainContent}>
-              <h1 id={CSS.heading}>Predict CO and NOx Emissions</h1>
-              <div id={CSS.tagline}>
-                  <p className={CSS.text}>Generate custom emission predictions and</p>
-                  <p className={CSS.text}>visualizations based on engine parameter data</p>
-              </div>
-              <img id={CSS.airplane} src={airplane} />
-          </div>
+      <img className={`block fixed top-[250px] left-[300px] ${CSS.airplane}`} src={airplane} />
+      <div className="relative top-[100px] flex items-center h-screen max-w-[500px] ml-[50px]">
+        <div className="flex flex-col gap-4">
+          <h1 className="leading-[80px] text-8xl font-bold" style={{ letterSpacing: '-0.05em' }}>
+            Predict
+            <br />
+            CO and NOx
+            <br />
+            Emissions
+          </h1>
+          <p className="text-xl italic font-thin">Generate custom emission predictions and visualizations based on engine parameter data</p>
+          <button onClick={handleClick} className={CSS.button}>Get started</button>
+        </div>
       </div>
     </div>
   );

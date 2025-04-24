@@ -7,7 +7,20 @@ import StackedBar from "../components/charts/StackedBar"
 
 const ComparePage = () => {
     const selectedEngineIds = useAppStore((state) => state.selectedEngineIds);
-    console.log(selectedEngineIds);
+    const MAX_ENGINES = 2;
+
+    if (selectedEngineIds.length < MAX_ENGINES) {
+        return (
+            <Template style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div className="flex flex-col w-full items-center">
+                    <h2 className="text-3xl font-bold text-center text-600">Not Enough Engines Selected</h2>
+                    <p className="mt-2 text-center text-gray-600">
+                        Please select at least two engines to compare.
+                    </p>
+                </div>
+            </Template>
+        );
+    }
 
     return (
         <Template>
