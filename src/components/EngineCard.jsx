@@ -61,7 +61,11 @@ const EngineCard = ({ engineId }) => {
     return (
         <button
             onClick={handleClick}
-            className={`block flex items-center justify-between rounded-[5px] p-[20px] border ${
+            className={`block flex items-center justify-between rounded-[5px] p-[20px] border transition-bg-color duration-300 ease-in-out
+                ${
+                    !compareClicked ? "hover:bg-[#f2f2f2]" : "hover:bg-green-100"
+                } 
+                ${
                 isSelected && compareClicked
                     ? "bg-green-100 border-green-600"
                     : "bg-white border-[#dbdbdb]"
@@ -72,7 +76,7 @@ const EngineCard = ({ engineId }) => {
                 <button
                     disabled={compareClicked}
                     className={`block w-[25px] p-[5px] ${
-                        compareClicked ? 'cursor-not-allowed' : 'hover:bg-[#e8e8e8] hover:rounded-[5px]'
+                        compareClicked ? 'cursor-not-allowed' : 'hover:bg-[#e8e8e8] hover:rounded-[5px] transition-bg-color duration-300 ease-in-out'
                     }`}
                 >
                     <img onClick={handleEditClick} src={edit} />
@@ -81,7 +85,7 @@ const EngineCard = ({ engineId }) => {
                 <button 
                     disabled={compareClicked}
                     className={`block w-[25px] p-[5px] ${
-                        compareClicked ? 'cursor-not-allowed' : 'hover:bg-[#e8e8e8] hover:rounded-[5px]'
+                        compareClicked ? 'cursor-not-allowed' : 'hover:bg-[#e8e8e8] hover:rounded-[5px] transition-bg-color duration-300 ease-in-out'
                     }`}
                 >
                     <img onClick={handleDeleteClick} src={deleteIcon} />

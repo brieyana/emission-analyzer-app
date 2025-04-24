@@ -13,18 +13,17 @@ const Sidebar = () => {
         setCompareClicked, 
         compareClicked, 
         clearEngineSelections,
-        selectedEngineIds,
     } = useAppStore();
 
     const handleCancel = () => {
         setCompareClicked(false);
         clearEngineSelections();
+        nav(`/home`)
     }
 
     const handleContinue = () => {
         setCompareClicked(false);
-        const queryString = selectedEngineIds.map(id => `engine=${encodeURIComponent(id)}`).join("&");
-        nav(`/home/compare?${queryString}`);
+        nav(`/home/compare`);
     }
 
     return (
