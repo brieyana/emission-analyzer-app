@@ -2,9 +2,11 @@
 import { useEffect, useRef } from "react";
 import Plot from "react-plotly.js";
 import useUserStore from "../../store/UserStore";
+import useAppStore from "../../store/AppStore";
 
 const RadarChart = ({ engineId }) => {
   const { emissions } = useUserStore();
+  const { compareClicked } = useAppStore();
   const predictions = emissions[engineId]?.predictions;
   const plotRef = useRef(null);
 
@@ -55,7 +57,14 @@ const RadarChart = ({ engineId }) => {
       }
     },
     showlegend: true,
-    margin: { t: 30, b: 30, l: 30, r: 30 },
+    legend: {
+      orientation: "h",
+      yanchor: "bottom",
+      y: -0.2,
+      xanchor: "center",
+      x: 0.5
+    },
+    margin: { t: 30, b: 50, l: 30, r: 30 },
     dragmode: "pan",
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
@@ -63,7 +72,10 @@ const RadarChart = ({ engineId }) => {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
-      <h3 className="font-bold text-center mb-4">Confidence Radar Chart</h3>
+      <h3 className="font-[Source_Sans_3] mb-[10px] text-center font-bold">
+        {compareClicked ? engineId : "Emission Level Distribution"}
+      </h3>
+
       <Plot
         data={data}
         layout={layout}

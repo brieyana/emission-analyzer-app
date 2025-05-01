@@ -5,54 +5,54 @@ import AddEngineButton from '../AddEngineButton';
 import useAppStore from '../../store/AppStore';
 import { useNavigate } from 'react-router-dom';
 import DownloadButton from '../DownloadButton';
+import { useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
     const nav = useNavigate();
+    const loc = useLocation();
+
     const { engines } = useUserStore();
     const { 
         setCompareClicked, 
         compareClicked, 
         clearEngineSelections,
+        previousPath,
+        setPreviousPath
     } = useAppStore();
 
-    const handleCancel = () => {
-        setCompareClicked(false);
-        clearEngineSelections();
-        nav(`/home`)
-    }
+    const handleClick = () => {
+        if (compareClicked) {
+            setCompareClicked(false);
+            clearEngineSelections();
 
-    const handleContinue = () => {
-        setCompareClicked(false);
-        nav(`/home/compare`);
+            if (previousPath) {
+                nav(previousPath);
+                setPreviousPath(null);
+            }
+        } else {
+            setPreviousPath(loc.pathname);
+            setCompareClicked(true);
+            nav(`/home/compare`);
+        }
     }
 
     return (
-        <div id={CSS.sidebar}>
+        <div className="p-[50px] text-[#505050] flex flex-col w-[300px] items-center gap-[10px]">
             <AddEngineButton />
             <button 
-                onClick={() => setCompareClicked(true)} 
-                className={`text-white bg-black py-3 px-4 rounded-md text-sm font-medium ${!compareClicked ? "mb-12" : "mb-0"}`}
+                onClick={handleClick} 
+                className={`w-full hover:bg-[#2f2f2f] text-white bg-black py-3 px-4 rounded-md text-sm font-medium mb-12 transition-bg-color duration-300 ease-in-out`}
             >
                 Compare Engines
             </button>
-            {compareClicked && (
-                <div className="flex justify-between mb-4">
-                    <button onClick={handleCancel} className="text-blue-600 text-sm underline hover:text-blue-800">
-                        Cancel
-                    </button>
-                    <button onClick={handleContinue} className="text-blue-600 text-sm underline hover:text-blue-800">
-                        Continue
-                    </button>
-                </div>
-            )}
-            <div className="flex justify-between">
+            <div className="w-full flex justify-between">
                 <p className={CSS.label}>Engines</p>
                 <DownloadButton />
             </div>
             {engines.map((engine) => (
                 <EngineCard key={engine.engine_identification} engineId={engine.engine_identification} />
             ))}
-        </div> 
+        </div>
     );
 }
 

@@ -61,9 +61,9 @@ const EngineCard = ({ engineId }) => {
     return (
         <button
             onClick={handleClick}
-            className={`block flex items-center justify-between rounded-[5px] p-[20px] border transition-bg-color duration-300 ease-in-out
+            className={`w-full block flex items-center justify-between rounded-[5px] p-[20px] border transition-bg-color duration-300 ease-in-out
                 ${
-                    !compareClicked ? "hover:bg-[#f2f2f2]" : "hover:bg-green-100"
+                    !compareClicked ? "hover:bg-[#e4e4e4]" : "hover:bg-green-100"
                 } 
                 ${
                 isSelected && compareClicked
@@ -74,10 +74,7 @@ const EngineCard = ({ engineId }) => {
             <p className="text-[0.8em] font-medium">{engineId}</p>
             <div className="flex">
                 <button
-                    disabled={compareClicked}
-                    className={`block w-[25px] p-[5px] ${
-                        compareClicked ? 'cursor-not-allowed' : 'hover:bg-[#e8e8e8] hover:rounded-[5px] transition-bg-color duration-300 ease-in-out'
-                    }`}
+                    className={`block w-[25px] p-[5px] hover:bg-[#e8e8e8] hover:rounded-[5px] transition-bg-color duration-300 ease-in-out`}
                 >
                     <img onClick={handleEditClick} src={edit} />
                 </button>
