@@ -1,11 +1,18 @@
 .container {
     display: flex;
-    gap: 10px;
     height: 100vh;
     min-width: 100vw;
-    padding: 60px;
     box-sizing: border-box;
     background-color: #f3f3f3;
+}
+
+.sticky {
+    position: sticky;
+    z-index: 1;
+    background-color: white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    top: -20px;
 }
 
 .message {

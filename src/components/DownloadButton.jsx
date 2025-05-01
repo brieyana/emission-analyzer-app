@@ -3,7 +3,7 @@ import icon from "../assets/images/download.png";
 import useAppStore from "../store/AppStore";
 
 const DownloadButton = () => {
-  const emissions = useUserStore((state) => state.emissions);
+  const { emissions } = useUserStore();
   const {
     setError,
     setMessage

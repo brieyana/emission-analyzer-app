@@ -30,6 +30,7 @@ const StackedBarChart = () => {
   const selectedEngineIds = useAppStore((state) => state.selectedEngineIds);
   const { emissions } = useUserStore();
   const { engines } = useUserStore();
+  const { compareClicked } = useAppStore();
 
   const traces = useMemo(() => {
     const tracesByLevel = levels.map((level) => ({
@@ -86,7 +87,9 @@ const StackedBarChart = () => {
   
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <h3 className="font-bold text-center text-xl mb-4">Stacked Emission Severity Chart</h3>
+      <h3 className="font-[Source_Sans_3] mb-[10px] text-center font-bold">
+        {compareClicked ? `` : "Absolute Emission Levels"}
+      </h3>
       <Plot
         data={traces}
         layout={{
