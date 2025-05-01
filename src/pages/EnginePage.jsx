@@ -1,5 +1,6 @@
 import Template from "../Template";
 import CSS from "./EnginePage.module.css";
+import "../assets/styles.css";
 import "../components/ParameterCard";
 import ParameterCard from "../components/ParameterCard";
 import { useParams } from "react-router-dom";
@@ -31,7 +32,7 @@ const EnginePage = () => {
                 {/* Engine Header */}
                 <div className="flex flex-col gap-2">
                     <h2 className="text-3xl font-bold">{engine.engine_identification}</h2>
-                    <div className="rounded-xl w-fit font-semibold py-[2px] px-[10px] bg-gray-300">
+                    <div className="rounded-xl w-fit font-semibold py-[2px] px-[10px] bg-[#FFD700]">
                         {engine.engine_type}
                     </div>
                 </div>
@@ -43,12 +44,11 @@ const EnginePage = () => {
                     <ParameterCard parameter="Pressure Ratio" value={engine.pressure_ratio} />
                 </div>
 
-               
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-[20px]">
-                    <div className={`${CSS.chart} p-[30px] bg-white rounded-xl p-4 h-[530px]`}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-[20px] h-[530px]">
+                    <div className={`${CSS.chart} p-[30px] bg-white rounded-xl p-4`}>
                         <Radar engineId={engineId} />
                     </div>
-                    <div className={`${CSS.chart} p-[30px] bg-white rounded-xl p-4 h-[530px]`}>
+                    <div className={`${CSS.chart} p-[30px] bg-white rounded-xl p-4`}>
                         <SingleStack engineId={engineId} />
                     </div>
                 </div>

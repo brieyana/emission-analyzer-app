@@ -23,6 +23,8 @@ const EngineCard = ({ engineId }) => {
         clearEngineSelections,
         selectedEngine,
         setSelectedEngine,
+        currentEngine,
+        setCurrentEngine,
     } = useAppStore();
 
     const nav = useNavigate();
@@ -37,6 +39,7 @@ const EngineCard = ({ engineId }) => {
                 clearEngineSelections();
             }
             
+            setCurrentEngine(engineId);
             nav(`/home/${engineId}`)
         }
     }
@@ -66,10 +69,14 @@ const EngineCard = ({ engineId }) => {
                     !compareClicked ? "hover:bg-[#e4e4e4]" : "hover:bg-green-100"
                 } 
                 ${
-                isSelected && compareClicked
+                    isSelected && compareClicked
                     ? "bg-green-100 border-green-600"
                     : "bg-white border-[#dbdbdb]"
-            }`}
+                }
+                ${
+                    !compareClicked && currentEngine == engineId ? "bg-[#e4e4e4]" : ``
+                }
+            `}
         >
             <p className="text-[0.8em] font-medium">{engineId}</p>
             <div className="flex">

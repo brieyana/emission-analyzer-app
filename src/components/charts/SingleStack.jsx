@@ -81,7 +81,7 @@ const SingleStack = ({ engineId }) => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-    <h3 className="font-[Source_Sans_3] text-center font-bold">Absolute Emission Levels</h3>
+    <h3 className="font-[Source_Sans_3] text-center font-semibold">Absolute Emission Levels</h3>
       <Plot
         data={traces}
         layout={{

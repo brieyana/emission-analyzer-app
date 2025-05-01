@@ -26,8 +26,8 @@ const AddEngineButton = () => {
     return (
         <button
             disabled={compareClicked}
-            className={`w-full text-white py-3 px-4 rounded-md text-sm font-medium hover:bg-[#2f2f2f] transition-bg-color duration-300 ease-in-out ${
-                compareClicked ? 'bg-gray-300 cursor-not-allowed' : 'bg-black'
+            className={`w-full text-white py-3 px-4 rounded-[10px] text-sm font-medium transition-bg-color duration-300 ease-in-out ${
+                compareClicked ? 'bg-gray-300 cursor-not-allowed' : 'bg-black hover:bg-[#2f2f2f]'
             }`}
             onClick={handleClick}
         >

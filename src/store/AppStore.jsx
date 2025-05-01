@@ -24,9 +24,11 @@ const useAppStore = create((set, get) => ({
     selectedEngineIds: [],
     selectedEngine: '',
     previousPath: null,
+    currentEngine: '',
 
 
     // Setters
+    setCurrentEngine: (currentEngine) => set({ currentEngine }),
     setPreviousPath: (path) => set({ previousPath: path }),
     setSelectedEngine: (selectedEngine) => set({ selectedEngine }),
     toggleEngineSelection: (engineId) =>

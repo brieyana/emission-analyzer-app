@@ -41,7 +41,7 @@ const Sidebar = () => {
             <AddEngineButton />
             <button 
                 onClick={handleClick} 
-                className={`w-full hover:bg-[#2f2f2f] text-white bg-black py-3 px-4 rounded-md text-sm font-medium mb-12 transition-bg-color duration-300 ease-in-out`}
+                className={`w-full hover:bg-[#2f2f2f] text-white bg-black py-3 px-4 rounded-[10px] text-sm font-medium mb-12 transition-bg-color duration-300 ease-in-out`}
             >
                 Compare Engines
             </button>
