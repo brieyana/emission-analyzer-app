@@ -25,9 +25,10 @@ const useAppStore = create((set, get) => ({
     selectedEngine: '',
     previousPath: null,
     currentEngine: '',
-
+    gettingEngines: false,
 
     // Setters
+    setGettingEngines: (gettingEngines) => set({ gettingEngines }),
     setCurrentEngine: (currentEngine) => set({ currentEngine }),
     setPreviousPath: (path) => set({ previousPath: path }),
     setSelectedEngine: (selectedEngine) => set({ selectedEngine }),

@@ -23,7 +23,8 @@ const {
     setEngineTypes,
     setSuccess,
     setMessage,
-    setEngineDeleted
+    setEngineDeleted,
+    setGettingEngines
 }  = useAppStore.getState();
 
 export const handleCreateUser = async () => {
@@ -108,7 +109,8 @@ export const handleGetUser = async (userId) => {
 export const handleGetEngines = async (userId) => {
     setLoading(true);
     setError(false);
-    
+    setGettingEngines(true);
+
     const result = await getEngines(userId);
     if (result.success) {
         setEngines(result.data.engines);
@@ -116,6 +118,7 @@ export const handleGetEngines = async (userId) => {
         setError(true);
     }
 
+    setGettingEngines(false);
     setLoading(false);
 }
 
@@ -148,6 +151,7 @@ export const handlePredictEmissions = async (userId, engineId) => {
         setEmissions(engineId, result.data)
     } else {
         setError(true);
+        setMessage("Unable to perform emission prediction");
     }
 
     setLoading(false);
@@ -167,7 +171,6 @@ export const handleDeleteEngine = async (userId, engineId) => {
 
     if (result.success) {
         setEngineDeleted(true);
-
     } else {
         setError(true);
         setMessage(`${engineId} could not be deleted`)

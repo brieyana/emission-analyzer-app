@@ -73,7 +73,7 @@ const RadarChart = ({ engineId }) => {
   return (
     <div className="w-full max-w-2xl mx-auto">
       <h3 className="font-[Source_Sans_3] mb-[10px] text-center font-semibold">
-        {compareClicked ? engineId : "Emission Level Distribution"}
+        {compareClicked ? engineId : "Predicted Emission Level Distribution"}
       </h3>
 
       <Plot

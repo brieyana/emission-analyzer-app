@@ -12,28 +12,46 @@ import Message from "./components/Message";
 
 const Template = ({ children, style }) => {
     const { userId, engines } = useUserStore();
-    const { formVisible, engineDeleted } = useAppStore();
+    const { formVisible, engineDeleted, gettingEngines } = useAppStore();
 
+    /**
+     * Retrieves engine types upon first render
+     */
+    useEffect(() => {
+        handleGetEngineTypes();
+    }, [])
+
+    /**
+     * When the add/edit form is closed, the application will
+     * retrieve the updated list of engines
+     */
     useEffect(() => {
         if (userId && !formVisible) {
             handleGetEngines(userId);
-            handleGetEngineTypes();
         }
     }, [userId, formVisible]);
 
-    useEffect(() => {
-        if (engines.length != 0) {
-            engines.forEach((engine) => {
-                handlePredictEmissions(userId, engine.engine_identification)
-            })
-        }
-    }, [userId, engines])
-
+    /**
+     * When an engine is deleted, the application retrieves the
+     * updated list of engines
+     */
     useEffect(() => {
         if (engineDeleted) {
             handleGetEngines(userId);
         }
-    }, [userId, engineDeleted])
+    }, [engineDeleted, userId])
+
+    /**
+     * Whenever a new engine list is retrieved, the application will
+     * send a request to predict the emissions of the engines
+     */
+    useEffect(() => {
+        if (engines.length > 0 && !gettingEngines) {
+            engines.forEach((engine) => {
+                handlePredictEmissions(userId, engine.engine_identification)
+            })
+        }
+    }, [userId, engines, gettingEngines])
 
     return (
         <div className="container">
