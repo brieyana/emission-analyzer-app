@@ -1,5 +1,4 @@
 import Template from "../Template";
-import CSS from "./EnginePage.module.css";
 import "../assets/styles.css";
 import "../components/ParameterCard";
 import ParameterCard from "../components/ParameterCard";
@@ -45,10 +44,10 @@ const EnginePage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-[20px] h-[530px]">
-                    <div className={`${CSS.chart} p-[30px] bg-white rounded-xl p-4`}>
+                    <div className="border border-solid border-[#c9c9c9] p-[30px] bg-white rounded-xl p-4">
                         <Radar engineId={engineId} />
                     </div>
-                    <div className={`${CSS.chart} p-[30px] bg-white rounded-xl p-4`}>
+                    <div className="border border-solid border-[#c9c9c9] p-[30px] bg-white rounded-xl p-4">
                         <SingleStack engineId={engineId} />
                     </div>
                 </div>

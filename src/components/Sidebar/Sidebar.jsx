@@ -6,6 +6,7 @@ import useAppStore from '../../store/AppStore';
 import { useNavigate } from 'react-router-dom';
 import DownloadButton from '../DownloadButton';
 import { useLocation } from 'react-router-dom';
+import home from '../../assets/images/home.png';
 
 const Sidebar = () => {
     const nav = useNavigate();
@@ -17,7 +18,8 @@ const Sidebar = () => {
         compareClicked, 
         clearEngineSelections,
         previousPath,
-        setPreviousPath
+        setPreviousPath,
+        setCurrentEngine
     } = useAppStore();
 
     const handleClick = () => {
@@ -36,8 +38,18 @@ const Sidebar = () => {
         }
     }
 
+    const handleHomeClick = () => {
+        setCurrentEngine('');
+        clearEngineSelections();
+        setCompareClicked(false);
+        nav(`/home`);
+    }
+
     return (
         <div className="p-[50px] text-[#505050] flex flex-col w-[300px] items-center gap-[10px]">
+            <div className="flex w-full justify-start mb-6">
+                <img onClick={handleHomeClick} className="block w-[20px] hover:cursor-pointer" src={home}/>
+            </div>
             <AddEngineButton />
             <button 
                 onClick={handleClick} 

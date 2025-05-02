@@ -62,9 +62,9 @@ const EngineCard = ({ engineId }) => {
     }
 
     return (
-        <button
+        <div
             onClick={handleClick}
-            className={`w-full block flex items-center justify-between rounded-[5px] p-[20px] border transition-bg-color duration-300 ease-in-out
+            className={`w-full flex hover:cursor-pointer items-center justify-between rounded-[5px] p-[20px] border border-solid transition-bg-color duration-300 ease-in-out
                 ${
                     !compareClicked ? "hover:bg-[#e4e4e4]" : "hover:bg-green-100"
                 } 
@@ -95,7 +95,7 @@ const EngineCard = ({ engineId }) => {
                     <img onClick={handleDeleteClick} src={deleteIcon} />
                 </button>
             </div>
-        </button>
+        </div>
     );
 }
 

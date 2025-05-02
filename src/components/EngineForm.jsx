@@ -83,8 +83,8 @@ const EngineForm = () => {
                 </div>
                 
                 <form className="p-[20px] max-w-[450px] mx-auto" onSubmit={handleSumbit}>
-                    <h3 className="text-[20px] font-semibold mt-2 mb-4 text-center">Engine Information</h3>
-                    <div className="mb-6">
+                    <h3 className="text-[20px] font-semibold mt-2 mb-6 text-center">Engine Information</h3>
+                    <div className="mb-8">
                         <TextInput
                             label="Engine Identification Number"
                             name="engine_identification"
