@@ -35,7 +35,7 @@ const ComparePage = () => {
                 </div>
                 <div className={isSticky ? "sticky" : `pt-[20px] pb-[40px]`}>
                     <div className="flex justify-between">
-                        <h3 className={`text-1xl font-bold mb-4`}>Engine Specifications</h3>
+                        <h3 className={`text-1xl font-semibold mb-4`}>Engine Specifications</h3>
                         <div className="flex items-center gap-2">
                             <input
                             type="checkbox"
@@ -78,7 +78,7 @@ const ComparePage = () => {
                     </div>
                 </div>
                 <div>
-                    <h3 className="text-1xl font-bold mb-4">Emission Level Distributions</h3>
+                    <h3 className="text-1xl font-semibold mb-4">Predicted Emission Level Distributions</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {selectedEngineIds.map((engineId) => {
                             return (
@@ -96,7 +96,7 @@ const ComparePage = () => {
                     </div>
                 </div>
                 <div>
-                <h3 className="text-1xl font-semibold mb-4">Absolute Emission Levels</h3>
+                <h3 className="text-1xl font-semibold mb-4">Predicted Absolute Emission Levels</h3>
                     <div className={`${CSS.chart} p-[30px] bg-white rounded-xl p-4 h-[530px]`}>
                         <StackedBar />
                     </div>

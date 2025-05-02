@@ -21,8 +21,6 @@ const EngineCard = ({ engineId }) => {
         selectedEngineIds,
         toggleEngineSelection,
         clearEngineSelections,
-        selectedEngine,
-        setSelectedEngine,
         currentEngine,
         setCurrentEngine,
     } = useAppStore();
@@ -31,14 +29,13 @@ const EngineCard = ({ engineId }) => {
     const isSelected = selectedEngineIds.includes(engineId);
 
     const handleClick = () => {
-        setSelectedEngine(engineId);
         if (compareClicked) {
             toggleEngineSelection(engineId);
         } else {
             if (selectedEngineIds.length > 0) {
                 clearEngineSelections();
             }
-            
+
             setCurrentEngine(engineId);
             nav(`/home/${engineId}`)
         }
@@ -56,9 +53,6 @@ const EngineCard = ({ engineId }) => {
     const handleDeleteClick = (event) => {
         event.stopPropagation();
         handleDeleteEngine(userId, engineId);
-        if (selectedEngine == engineId) {
-            nav(`/home`);
-        }
     }
 
     return (
@@ -66,15 +60,13 @@ const EngineCard = ({ engineId }) => {
             onClick={handleClick}
             className={`w-full flex hover:cursor-pointer items-center justify-between rounded-[5px] p-[20px] border border-solid transition-bg-color duration-300 ease-in-out
                 ${
-                    !compareClicked ? "hover:bg-[#e4e4e4]" : "hover:bg-green-100"
-                } 
-                ${
-                    isSelected && compareClicked
-                    ? "bg-green-100 border-green-600"
-                    : "bg-white border-[#dbdbdb]"
-                }
-                ${
-                    !compareClicked && currentEngine == engineId ? "bg-[#e4e4e4]" : ``
+                    compareClicked
+                    ? isSelected
+                        ? "bg-green-100 border-green-600"
+                        : "hover:bg-green-100 bg-white border-[#dbdbdb]"
+                    : currentEngine === engineId
+                        ? "bg-[#e4e4e4] border-[#dbdbdb]"
+                        : "hover:bg-[#e4e4e4] bg-white border-[#dbdbdb]"
                 }
             `}
         >

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useMemo } from "react";
 import Plot from "react-plotly.js";
 import useUserStore from "../../store/UserStore";
@@ -81,7 +82,7 @@ const SingleStack = ({ engineId }) => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-    <h3 className="font-[Source_Sans_3] text-center font-semibold">Absolute Emission Levels</h3>
+    <h3 className="font-[Source_Sans_3] text-center font-semibold">Predicted Absolute Emission Levels</h3>
       <Plot
         data={traces}
         layout={{
