@@ -167,8 +167,6 @@ export const handleDeleteEngine = async (userId, engineId) => {
 
     if (result.success) {
         setEngineDeleted(true);
-        setSuccess(true);
-        setMessage(`${engineId} deleted`);
 
     } else {
         setError(true);

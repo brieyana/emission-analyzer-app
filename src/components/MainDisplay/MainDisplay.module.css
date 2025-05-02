@@ -4,8 +4,6 @@
     color: black;
     background-color: white;
     box-sizing: border-box;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
     padding: 20px;
     box-shadow: 0.5px 0.5px 2px 0px rgba(0, 0, 0, 0.25);
     overflow-y: scroll;

@@ -7,7 +7,7 @@ const TextInput = ({ label, name, placeholder, value, handleChange }) => {
 
     return (
         <div className="mb-4">
-            <label className="block text-sm font-400 mb-1">
+            <label className="block text-sm font-light mb-1">
                 {label}
             </label>
             <input

@@ -33,7 +33,7 @@ const Message = () => {
         const timer = setTimeout(() => {
             setVisible(false);
             setSuccess(false);
-        }, 2500);
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, [success, setSuccess])

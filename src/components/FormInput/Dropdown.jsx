@@ -7,7 +7,7 @@ const Dropdown = ({ label, name, value, handleChange }) => {
 
     return (
         <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">
+            <label className="block text-sm font-light mb-1">
                 {label}
             </label>
             <select

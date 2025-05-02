@@ -87,7 +87,7 @@ const StackedBarChart = () => {
   
   return (
     <div className="w-full max-w-4xl mx-auto">
-      <h3 className="font-[Source_Sans_3] mb-[10px] text-center font-bold">
+      <h3 className="font-[Source_Sans_3] mb-[10px] text-center font-semibold">
         {compareClicked ? `` : "Absolute Emission Levels"}
       </h3>
       <Plot

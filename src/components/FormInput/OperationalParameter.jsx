@@ -7,7 +7,7 @@ const OperationalParameter = ({ label, name, value, placeholder, handleChange })
 
     return (
         <div>
-            <label className="block text-sm font-400 mb-1">
+            <label className="block text-sm font-light mb-1">
                 {label}
             </label>
             <input
