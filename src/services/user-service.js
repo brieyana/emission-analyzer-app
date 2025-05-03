@@ -78,3 +78,11 @@ export const deleteEngine = async (data) => {
         return { success: false, error: error.response?.data };
     }
 }
+
+export const getToken = async () => {
+    try {
+        await axiosInstance.get('/get_token', { withCredentials: true });
+    } catch (error) {
+        return { success: false, error: error.response?.data };
+    }
+}

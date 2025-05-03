@@ -4,6 +4,7 @@ import CSS from './LandingPage.module.css';
 import { useNavigate } from 'react-router-dom'
 import useUserStore from '../store/UserStore';
 import { handleCreateUser, handleGetUser } from '../handlers/user-handler';
+import { getToken } from '../services/user-service';
 import { useEffect, useRef, useState } from 'react';
 import useAppStore from '../store/AppStore';
 import Message from '../components/Message';
@@ -16,6 +17,10 @@ const LandingPage = () => {
     const ref = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
 
+    useEffect(() => {
+        getToken();
+    }, [])
+    
     const { 
         userId, 
         user, 

@@ -9,8 +9,6 @@ const useUserStore = create((set) => ({
     userId: localStorage.getItem("user_id") || null,
     user: null,
     engines: [],
-
-    // Setters
     emissions: {},
 
     // Setters
